@@ -263,5 +263,8 @@ socket.send(JSON.stringify(data));
 
 ### Are the JSON documents interchangeable with other kind of documents?
 
+It would require refactoring of the code since the fast-json-patch library is extensively used in various locations,
+but in theory, yes.
+
 ### How are conflicts handled?
 
