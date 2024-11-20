@@ -197,7 +197,7 @@ strPatch
 
 ### Which implementation of diff-patch algorithms are used?
 
-This implementation uses the json-fast-patch package, version 3.x.x.
+This implementation uses the fast-json-patch package, version 3.x.x.
 
 ### Where are the documents and shadows?
 
