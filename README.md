@@ -229,19 +229,25 @@ jsonpatch.deepClone(mainText);
 No data can be received anymore. When the page is reloaded, the changes made **before** SRC=0% are displayed.  
 If SRC is then increased and bits are changed, another update must be made for the changes to fully appear on the other side (the updated version).
 
-**C = 60%:**  
+---
+
+**Client Receive Chance = 60%:**  
 If the Client Receive Chance is set to 60%, some bits may not be received. For example:  
-**User1:** Hello  
-**User2:** Hello  
-**User1:** Hello1  
-**User2:** Hello
+*(User tests with "Hallo" remain unchanged.)*  
+Here, a change to the message is made, but not all bits are transmitted to the other side. Adding another bit ensures that both the previous and current updates are transmitted, resulting in the fully updated message being displayed.
 
-Here, User1 makes a change to "Hello1" (adding 1). However, this bit is not received by User2.  
-If another change is made:  
-**User1:** Hello11  
-**User2:** Hello11
+---
 
-Here, User1 adds another "1", which is received by User2. As a result, not only is the latest "1" transmitted, but also the previous one, and the fully updated message is successfully displayed.
+**Server + Client Receive Chance = 50%:**  
+When both Server and Client Receive Chance are set to 50%, the error margin increases significantly. For example:  
+*(User tests remain unchanged.)*
+
+In this case, the error is larger, and the data only updates fully once an individual bit is successfully transmitted.
+
+If both sides make changes **simultaneously**, the fields can show different texts. For example:  
+*(User tests with "Hallo" remain unchanged.)*
+
+When a bit is successfully received, the new bits from one user are appended **before** the changes made by the other user that were not transmitted.
 
 ### Where / how is the edit stack implemented? How can the stack be packaged for sending? 
 
