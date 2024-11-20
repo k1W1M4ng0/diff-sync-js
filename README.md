@@ -201,4 +201,12 @@ This implementation uses the fast-json-patch package, version 3.x.x.
 
 ### Where are the documents and shadows?
 
-How 
+They are saved in a container object, which is created in the client or server.
+The DS implementation uses a parameter to get the reference to this object.
+The document and shadow in a container is accessible with:
+
+```js
+container.shadow
+// or
+container.backup
+```
