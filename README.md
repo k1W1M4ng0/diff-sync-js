@@ -205,6 +205,25 @@ They are saved in a container object, which is created in the client or server.
 The DS implementation uses a parameter to get the reference to this object.
 The document and shadow in a container is accessible with:
 
+### How and Why can we adjust the sync-cycle? What are the dis-/advantages?
+
+**Server Receive Chance = 0%:**  
+No data can be received anymore. When the page is reloaded, the changes made **before** SRC=0% are displayed.  
+If SRC is then increased and bits are changed, another update must be made for the changes to fully appear on the other side (the updated version).
+
+**C = 60%:**  
+If the Client Receive Chance is set to 60%, some bits may not be received. For example:  
+**User1:** Hello  
+**User2:** Hello  
+**User1:** Hello1  
+**User2:** Hello
+
+Here, User1 makes a change to "Hello1" (adding 1). However, this bit is not received by User2.  
+If another change is made:  
+**User1:** Hello11  
+**User2:** Hello11
+
+Here, User1 adds another "1", which is received by User2. As a result, not only is the latest "1" transmitted, but also the previous one, and the fully updated message is successfully displayed.
 ```js
 container.shadow
 // or
