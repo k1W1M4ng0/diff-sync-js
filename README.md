@@ -249,6 +249,8 @@ If both sides make changes **simultaneously**, the fields can show different tex
 
 When a bit is successfully received, the new bits from one user are appended **before** the changes made by the other user that were not transmitted.
 
+The disadvantage might be, that if both the Client AND the Server Receive Chances are low, there might or will be a colission and the Text will not be the same. The advantage would be that, if one of the two Receive Chances are low, it's not an issue, since all of the changes will be updated once a bit is received again.
+
 ### Where / how is the edit stack implemented? How can the stack be packaged for sending? 
 
 It is implemented as JS array, in the container:
