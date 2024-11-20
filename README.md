@@ -210,3 +210,20 @@ container.shadow
 // or
 container.backup
 ```
+
+### Where / how is the edit stack implemented?
+
+It is implemented as JS array, in the container:
+
+```js
+container.shadow.edits
+```
+
+### Is it possible to deploy a Peer-to-Peer version?
+
+### How is it possible to use the API in other JS projects?
+
+### Are the JSON documents interchangeable with other kind of documents?
+
+### How are conflicts handled?
+
