@@ -192,18 +192,36 @@ strPatch
      */
     strPatch(val, patch)
 ```
-
 ## School work
 
-### Which implementation of diff-patch algorithms are used?
+### Which implementation of diff-patch algorithms are used? Are there better/newer ones?
 
 This implementation uses the fast-json-patch package, version 3.x.x.
+It uses the RFC6902 (src: https://www.npmjs.com/package/fast-json-patch).
 
-### Where are the documents and shadows?
+We found the following:
+- https://github.com/benjamine/jsondiffpatch (uses LCS and the google one)
+- https://github.com/cujojs/jiff (also uses RFC6902)
+- https://github.com/google/diff-match-patch (uses Myer's diff algorithm)
+
+### Where are the documents and shadows? How is a document copied?
 
 They are saved in a container object, which is created in the client or server.
 The DS implementation uses a parameter to get the reference to this object.
 The document and shadow in a container is accessible with:
+
+```js
+container.shadow
+// or
+container.backup
+```
+
+A (json) document is copied with:
+
+```js
+// it uses the fast-json-patch library
+jsonpatch.deepClone(mainText);
+```
 
 ### How and Why can we adjust the sync-cycle? What are the dis-/advantages?
 
@@ -224,18 +242,19 @@ If another change is made:
 **User2:** Hello11
 
 Here, User1 adds another "1", which is received by User2. As a result, not only is the latest "1" transmitted, but also the previous one, and the fully updated message is successfully displayed.
-```js
-container.shadow
-// or
-container.backup
-```
 
-### Where / how is the edit stack implemented?
+### Where / how is the edit stack implemented? How can the stack be packaged for sending? 
 
 It is implemented as JS array, in the container:
 
 ```js
 container.shadow.edits
+```
+
+Because the stack is an array of json objects, it can easily be stringified:
+
+```js
+socket.send(JSON.stringify(data));
 ```
 
 ### Is it possible to deploy a Peer-to-Peer version?
